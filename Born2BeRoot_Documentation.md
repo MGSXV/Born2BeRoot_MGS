@@ -14,6 +14,6 @@
 ## Born2BeRoot
 > This section is for **42Network** cursus, if you are not a **42Network** student you don't have to follow these instructions, and you can set you prefered configuration.
 ### Installation:
-    * You can follow this [video](https://www.youtube.com/watch?v=2w-2MX5QrQw) for the whole installation proccess.
+* You can follow this [video](https://www.youtube.com/watch?v=2w-2MX5QrQw) for the whole installation proccess.
 ### Basic configuration:
 #### SUDO
