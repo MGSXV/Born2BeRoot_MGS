@@ -31,4 +31,18 @@
     - By default, when you type *sudo + some_cmd* as a normal user, you are required to enter your own password. This command is for protecting sudo access by requesting root password.
     - **This step is not required in Born2beroot subject**!
 #### SSH
-* **Secure Shell (SSH)**, refers to the protocol by which network communications can take place safely and remotely via an unsecured network. [More](https://www.n-able.com/blog/ssh-network-protocol-overview)
+* **Secure Shell (SSH)**, refers to the protocol by which network communications can take place safely and remotely via an unsecured network... [More](https://www.n-able.com/blog/ssh-network-protocol-overview)
+1. Install **OpenSSH**: ```apt install openssh-server -y```.
+2. Check SSH status: ```systemctl status ssh | grep "Active"```.
+    - The results: *Active: active (running)*.
+3. Change the default SSH port from 22 to 4242: ```sed -i 's/#Port 22/Port 4242/g' /etc/ssh/sshd_config && systemctl restart ssh && systemctl reload ssh```
+    - A port is A port is a virtual point where network connections start and end. Ports are software-based and managed by a computer's operating system. [More](https://www.cloudflare.com/learning/network-layer/what-is-a-computer-port/).
+    - This command is made from three parts:
+        - **sed**: reads the specified files, modifying the input as specified by a list of commands. [RTFM](https://linux.die.net/man/1/sed) for more.
+        - **&&**: Executes the command that follows the ```&&``` only if the first command is successful.
+        - **systemctl**: is an init system and system manager, used here to ```restart``` and ```reload``` *SSH* service.
+4. Disable SSH login for the root user: ```sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/g /etc/ssh/sshd_config && systemctl restart ssh && systemctl reload ssh```
+    - **sshd_config**: is an ASCII text based file where the different configuration options of the SSH server are indicated and configured with keyword/argument pairs.
+    - **PermitRootLogin**: Specifies whether root can log in using ssh.
+#### UFW
+* **Uncomplicated Firewall (UFW)** provides a framework for managing netfilter, as well as a command-line interface for manipulating the firewall.
