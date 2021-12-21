@@ -49,6 +49,6 @@
     - Install UFW: ```sudo apt install ufw -y```
     - Setting up the default policies: ```sudo ufw default deny incoming && sudo ufw default allow outgoing```
         - Block all the incoming traffic and allow all the outgoing traffic
-    - Allowing specific connections: ```sudo ufw allow 4242``
+    - Allowing specific connections: ```sudo ufw allow 4242```
         - **4242**: The target port to allow incoming traffic from *4242* in our case.
     - Enable UFW: ```sudo ufw enable```
