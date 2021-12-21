@@ -17,3 +17,7 @@
 * You can follow this [video](https://www.youtube.com/watch?v=2w-2MX5QrQw) for the whole installation proccess.
 ### Basic configuration:
 #### SUDO
+1. Switch to root user:
+    - ```su -``` Or ```su root```
+2. Install **sudo**:
+    - ```apt install sud -y```
