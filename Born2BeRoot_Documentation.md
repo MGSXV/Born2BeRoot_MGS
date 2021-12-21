@@ -11,12 +11,12 @@
 #                                                                              #
 # **************************************************************************** #
 ```
-## Born2BeRoot
+# Born2BeRoot
 > This section is for **42Network** cursus, if you are not a **42Network** student you don't have to follow these instructions, and you can set your prefered configuration.
-### Installation:
+## Installation:
 * You can follow this [video](https://www.youtube.com/watch?v=2w-2MX5QrQw) for the whole installation proccess.
-### Basic configuration:
-#### SUDO
+## Basic configuration:
+### SUDO
 1. Switch to root user: ```su -``` Or ```su root```.
 2. Install **sudo**:
 ```
@@ -42,7 +42,7 @@ $ sudo touch sudoers_config && sudo echo "Default rootpw" >> /etc/sudoers.d/sudo
 ```
 * By default, when you type *sudo + some_cmd* as a normal user, you are required to enter your own password. This command is for protecting sudo access by requesting root password.
 * **This step is not required in Born2beroot subject**!
-#### SSH
+### SSH
 * **Secure Shell (SSH)**, refers to the protocol by which network communications can take place safely and remotely via an unsecured network... [More](https://www.n-able.com/blog/ssh-network-protocol-overview)
 1. Install **OpenSSH**:
 ```
@@ -68,7 +68,7 @@ $ sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/g /etc/ss
 ```
 * **sshd_config**: is an ASCII text based file where the different configuration options of the SSH server are indicated and configured with keyword/argument pairs.
 * **PermitRootLogin**: Specifies whether root can log in using ssh.
-#### UFW
+### UFW
 * **Uncomplicated Firewall (UFW)** provides a framework for managing netfilter, as well as a command-line interface for manipulating the firewall. [More](https://wiki.debian.org/Uncomplicated%20Firewall%20%28ufw%29).
 1. Install UFW:
 ```
@@ -88,13 +88,13 @@ $ sudo ufw allow 4242
 ```
 $ sudo ufw enable
 ```
-#### Manage Hostname
+### Manage Hostname
 * The **hostname** is what a device is called on a network, it's used to distinguish devices within a local network. In addition, computers can be found by others through the hostname, which enables data exchange within a network.
 1. Update your machine hostname:
 ```
 $ hostname set-hostname *new_hostname*
 ```
-#### Strong Password Polcies
+### Strong Password Polcies
 * For the sake of this section we will be using *libpam-pwquality* package, it's a set of tools that allow you to configure the refusal of weak passwords for root and user sessions. [More](https://debian-facile.org/doc:securite:passwd:libpam-pwquality).
 * */etc/security/pwquality.conf* is where the configuration file for libpam-pwquality is located.
 * */etc/login.defs* file provides default configuration information for several user account parameters.
