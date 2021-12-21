@@ -66,4 +66,13 @@
 5. The password must be at least 10 characters long: ```sed -i 's/# minlen = 8/minline = 10' /etc/security/pwquality.conf```.
 	- **minlen**: Minimum size of the new password.
 6. The password must contain at least one uppercase: ```sed -i 's/# ucredit = 0/ucredit = -1' /etc/security/pwquality.conf```.
-	- **ucredit**: Maximum number of uppercase charachters, if *ucredit < 0* it means at least *ucredit* uppercases charachters in the string. *i.e*: ucredit = -1, means the password must contains at least one uppercase.
+	- **ucredit**: Maximum number of uppercase charachters, if *ucredit < 0* it means at least *ucredit* uppercase charachters in the string. *i.e: ucredit = -1, means the password must contains at least one uppercase*.
+7. The password must contain at least one digit: ```sed -i 's/# dcredit = 0/dcredit = -1' /etc/security/pwquality.conf```
+	- **dcredit**: Maximum number of digit charachters, if *dcredit < 0* it means at least *dcredit* digit charachters in the string. *i.e: ucredit = -1, means the password must contains at least one digit*.
+8. The password must not contain more than 3 consecutive identical charachters: ```sed -i 's/# maxclassrepeat = 0/maxclassrepeat = 3' /etc/security/pwquality.conf```
+	- **dcredit**: Maximum nuber of consecutive identical characters in the password.
+9. The password must not contain the name of the user:
+```
+$ sed -i 's/# usercheck = 1/usercheck = 1' /etc/security/pwquality.conf
+```
+	- **usercheck**: Checks whether the password contains the name of the user.
