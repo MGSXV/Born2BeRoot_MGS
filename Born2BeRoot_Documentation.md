@@ -25,5 +25,5 @@
     - **usermod**: The usermod command modifies the system account files to reflect the changes that are specified on the command line. [man page](https://linux.die.net/man/8/usermod).
 3. Add your user to sudo group: ```sudo usermod -aG sudo <username>```.
     - **-aG**: The flags for *usermod* command, check the [RTFM](https://linux.die.net/man/8/usermod) for more information.
-    - **sudo**: The group that you need to add the user to > sudo here.
-    - **<username>**: The user which will be added to the specified group.
+    - **sudo**: The group that you need to add the user to (sudo in our example).
+    - **username**: The user which will be added to the specified group.
