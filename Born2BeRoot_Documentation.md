@@ -88,6 +88,12 @@ $ sudo ufw allow 4242
 ```
 $ sudo ufw enable
 ```
+#### Manage Hostname
+* The **hostname** is what a device is called on a network, it's used to distinguish devices within a local network. In addition, computers can be found by others through the hostname, which enables data exchange within a network.
+1. Update your machine hostname:
+```
+$ hostname set-hostname *new_hostname*
+```
 #### Strong Password Polcies
 * For the sake of this section we will be using *libpam-pwquality* package, it's a set of tools that allow you to configure the refusal of weak passwords for root and user sessions. [More](https://debian-facile.org/doc:securite:passwd:libpam-pwquality).
 * */etc/security/pwquality.conf* is where the configuration file for libpam-pwquality is located.
@@ -113,38 +119,37 @@ $ sudo sed -i 's/PASS_WARN_AGE\t7/PASS_WARN_AGE\t7/g' /etc/login.defs
 * **PASS_WARN_AGE**	Number of days warning given before a password expires.
 5. The password must be at least 10 characters long:
 ```
-$ sed -i 's/# minlen = 8/minline = 10' /etc/security/pwquality.conf
+$ sudo sed -i 's/# minlen = 8/minline = 10' /etc/security/pwquality.conf
 ```
 * **minlen**: Minimum size of the new password.
 6. The password must contain at least one uppercase:
 ```
-$ sed -i 's/# ucredit = 0/ucredit = -1' /etc/security/pwquality.conf
+$ sudo sed -i 's/# ucredit = 0/ucredit = -1' /etc/security/pwquality.conf
 ```
 * **ucredit**: Maximum number of uppercase charachters, if *ucredit < 0* it means at least *ucredit* uppercase charachters in the string. *i.e: ucredit = -1, means the password must contains at least one uppercase*.
 7. The password must contain at least one digit:
 ```
-$ sed -i 's/# dcredit = 0/dcredit = -1' /etc/security/pwquality.conf
+$ sudo sed -i 's/# dcredit = 0/dcredit = -1' /etc/security/pwquality.conf
 ```
 * **dcredit**: Maximum number of digit charachters, if *dcredit < 0* it means at least *dcredit* digit charachters in the string. *i.e: ucredit = -1, means the password must contains at least one digit*.
 8. The password must not contain more than 3 consecutive identical charachters:
 ```
-$ sed -i 's/# maxclassrepeat = 0/maxclassrepeat = 3' /etc/security/pwquality.conf
+$ sudo sed -i 's/# maxclassrepeat = 0/maxclassrepeat = 3' /etc/security/pwquality.conf
 ```
 * **dcredit**: Maximum nuber of consecutive identical characters in the password.
 9. The password must not contain the name of the user:
 ```
-$ sed -i 's/# usercheck = 1/usercheck = 1' /etc/security/pwquality.conf
+$ sudo sed -i 's/# usercheck = 1/usercheck = 1' /etc/security/pwquality.conf
 ```
 * **usercheck**: Checks whether the password contains the name of the user.
 10.  The password must have at least 7 characters that are not part of the former password:
 ```
-$ sed -i 's/# difok = 1/difok = 7' /etc/security/pwquality.conf
+$ sudo sed -i 's/# difok = 1/difok = 7' /etc/security/pwquality.conf
 ```
 * **difok**: Number of characters of the new password which are not present in the old one.
 * This rules does not apply for root by default.
 11.  Applying the previous policies to root:
 ```
-$ sed -i 's/# enforce_for_root/enforce_for_root' /etc/security/pwquality.conf
+$ sudo sed -i 's/# enforce_for_root/enforce_for_root' /etc/security/pwquality.conf
 ```
 * **enforce_for_root**: Specifies that even password of the root user must successfully pass the previous tests.
-#### Manage Hostname
