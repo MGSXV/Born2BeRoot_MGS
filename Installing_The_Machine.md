@@ -4,7 +4,7 @@
 #                                                         :::      ::::::::    #
 #    Installing_The_Machine.md                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sel-kham <sel-kham@student.42.fr>                    +#+  +:+       +#+         #
+#    By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/21 00:59:37 by sel-kham          #+#    #+#              #
 #    Updated: 2021/12/21 03:07:05 by sel-kham         ###   ########.fr        #
