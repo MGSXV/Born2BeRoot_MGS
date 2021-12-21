@@ -7,7 +7,7 @@
 #    By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/21 03:08:45 by sel-kham          #+#    #+#              #
-#    Updated: 2021/12/21 03:17:23 by sel-kham         ###   ########.fr        #
+#    Updated: 2021/12/21 04:44:32 by sel-kham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ```
@@ -27,3 +27,8 @@
     - **-aG**: The flags for *usermod* command, [RTFM](https://linux.die.net/man/8/usermod) for more information.
     - **sudo**: The group that you need to add the user to (sudo in our example).
     - **username**: The user which will be added to the specified group.
+4. Protect sudo and root privileges: ```touch sudoers_config && echo "Default rootpw" >> /etc/sudoers.d/sudoers_config```
+    - By default, when you type *sudo + some_cmd* as a normal user, you are required to enter your own password. This command is for protecting sudo access by requesting root password.
+    - **This step is not required in Born2beroot subject**!
+#### SSH
+* **Secure Shell (SSH)**, refers to the protocol by which network communications can take place safely and remotely via an unsecured network. [More](https://www.n-able.com/blog/ssh-network-protocol-overview)
