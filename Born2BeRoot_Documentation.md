@@ -75,4 +75,4 @@
 ```
 $ sed -i 's/# usercheck = 1/usercheck = 1' /etc/security/pwquality.conf
 ```
-	- **usercheck**: Checks whether the password contains the name of the user.
+* ***usercheck**: Checks whether the password contains the name of the user.
