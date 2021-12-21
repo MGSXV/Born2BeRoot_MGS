@@ -54,23 +54,47 @@
 4. Enable UFW: ```sudo ufw enable```
 #### Strong Password Polcies
 * For the sake of this section we will be using *libpam-pwquality* package, it's a set of tools that allow you to configure the refusal of weak passwords for root and user sessions. [More](https://debian-facile.org/doc:securite:passwd:libpam-pwquality).
-1. Install libpam-pwquaality: ```sudo apt install libpam-pwquality -y```.
-	- */etc/security/pwquality.conf* is where the configuration file for libpam-pwquality is located.
-	- */etc/login.defs* file provides default configuration information for several user account parameters.
-2. Setting up password to expire every 30 days: ```sudo sed -i 's/PASS_MAX_DAYS\t99999/PASS_MAX_DAYS\t30/g' /etc/login.defs```.
-	- **PASS_MAX_DAYS**	Maximum number of days a password may be used.
-3. Days allowed before the modification of a password: ```sudo sed -i 's/PASS_MIN_DAYS\t0/PASS_MIN_DAYS\t2/g' /etc/login.defs```.
-	- **PASS_MIN_DAYS**	Minimum number of days allowed between password changes.
-4. Setting up a warning message 7 days before password expires: ```sudo sed -i 's/PASS_WARN_AGE\t7/PASS_WARN_AGE\t7/g' /etc/login.defs```.
-	- **PASS_WARN_AGE**	Number of days warning given before a password expires.
-5. The password must be at least 10 characters long: ```sed -i 's/# minlen = 8/minline = 10' /etc/security/pwquality.conf```.
-	- **minlen**: Minimum size of the new password.
-6. The password must contain at least one uppercase: ```sed -i 's/# ucredit = 0/ucredit = -1' /etc/security/pwquality.conf```.
-	- **ucredit**: Maximum number of uppercase charachters, if *ucredit < 0* it means at least *ucredit* uppercase charachters in the string. *i.e: ucredit = -1, means the password must contains at least one uppercase*.
-7. The password must contain at least one digit: ```sed -i 's/# dcredit = 0/dcredit = -1' /etc/security/pwquality.conf```
-	- **dcredit**: Maximum number of digit charachters, if *dcredit < 0* it means at least *dcredit* digit charachters in the string. *i.e: ucredit = -1, means the password must contains at least one digit*.
-8. The password must not contain more than 3 consecutive identical charachters: ```sed -i 's/# maxclassrepeat = 0/maxclassrepeat = 3' /etc/security/pwquality.conf```
-	- **dcredit**: Maximum nuber of consecutive identical characters in the password.
+1. Install libpam-pwquaality:
+```
+$ sudo apt install libpam-pwquality -y
+```
+* */etc/security/pwquality.conf* is where the configuration file for libpam-pwquality is located.
+* */etc/login.defs* file provides default configuration information for several user account parameters.
+2. Setting up password to expire every 30 days:
+```
+$ sudo sed -i 's/PASS_MAX_DAYS\t99999/PASS_MAX_DAYS\t30/g' /etc/login.defs
+```
+* **PASS_MAX_DAYS**	Maximum number of days a password may be used.
+3. Days allowed before the modification of a password:
+```
+$ sudo sed -i 's/PASS_MIN_DAYS\t0/PASS_MIN_DAYS\t2/g' /etc/login.defs
+```
+* **PASS_MIN_DAYS**	Minimum number of days allowed between password changes.
+4. Setting up a warning message 7 days before password expires:
+```
+$ sudo sed -i 's/PASS_WARN_AGE\t7/PASS_WARN_AGE\t7/g' /etc/login.defs
+```
+* **PASS_WARN_AGE**	Number of days warning given before a password expires.
+5. The password must be at least 10 characters long:
+```
+$ sed -i 's/# minlen = 8/minline = 10' /etc/security/pwquality.conf
+```
+* **minlen**: Minimum size of the new password.
+6. The password must contain at least one uppercase:
+```
+$ sed -i 's/# ucredit = 0/ucredit = -1' /etc/security/pwquality.conf
+```
+* **ucredit**: Maximum number of uppercase charachters, if *ucredit < 0* it means at least *ucredit* uppercase charachters in the string. *i.e: ucredit = -1, means the password must contains at least one uppercase*.
+7. The password must contain at least one digit:
+```
+$ sed -i 's/# dcredit = 0/dcredit = -1' /etc/security/pwquality.conf
+```
+* **dcredit**: Maximum number of digit charachters, if *dcredit < 0* it means at least *dcredit* digit charachters in the string. *i.e: ucredit = -1, means the password must contains at least one digit*.
+8. The password must not contain more than 3 consecutive identical charachters:
+```
+$ sed -i 's/# maxclassrepeat = 0/maxclassrepeat = 3' /etc/security/pwquality.conf
+```
+* **dcredit**: Maximum nuber of consecutive identical characters in the password.
 9. The password must not contain the name of the user:
 ```
 $ sed -i 's/# usercheck = 1/usercheck = 1' /etc/security/pwquality.conf
