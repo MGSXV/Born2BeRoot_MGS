@@ -21,7 +21,7 @@
 2. Memory size: To select the RAM to be allocated (1024MB or more is recommended).
 3. Hard disk :
     -   Do not add a virtual hard disk.
-    - \> VHD (Virtual Hard Disk).
+    - > VHD (Virtual Hard Disk).
     -   Use an existing virtual hard disk.
 4. Hard disk file type:
     - \> VDI (VirtualBox Disk Image).
