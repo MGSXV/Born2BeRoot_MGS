@@ -7,7 +7,7 @@
 #    By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/21 03:08:45 by sel-kham          #+#    #+#              #
-#    Updated: 2021/12/21 04:44:32 by sel-kham         ###   ########.fr        #
+#    Updated: 2021/12/21 20:49:07 by sel-kham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ```
@@ -135,4 +135,16 @@ $ sed -i 's/# maxclassrepeat = 0/maxclassrepeat = 3' /etc/security/pwquality.con
 ```
 $ sed -i 's/# usercheck = 1/usercheck = 1' /etc/security/pwquality.conf
 ```
-* ***usercheck**: Checks whether the password contains the name of the user.
+* **usercheck**: Checks whether the password contains the name of the user.
+10.  The password must have at least 7 characters that are not part of the former password:
+```
+$ sed -i 's/# difok = 1/difok = 7' /etc/security/pwquality.conf
+```
+* **difok**: Number of characters of the new password which are not present in the old one.
+* This rules does not apply for root by default.
+11.  Applying the previous policies to root:
+```
+$ sed -i 's/# enforce_for_root/enforce_for_root' /etc/security/pwquality.conf
+```
+* **enforce_for_root**: Specifies that even password of the root user must successfully pass the previous tests.
+#### Manage Hostname
