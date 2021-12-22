@@ -153,3 +153,20 @@ $ sudo sed -i 's/# difok = 1/difok = 7' /etc/security/pwquality.conf
 $ sudo sed -i 's/# enforce_for_root/enforce_for_root' /etc/security/pwquality.conf
 ```
 * **enforce_for_root**: Specifies that even password of the root user must successfully pass the previous tests.
+### Sudo authentication restriction
+* Linux is more flixible than you thought. You can have a lot of freedom while using linux. Here are some exaples of what you can do:
+1. Authentication using sudo has to be limited to 3 attempts in the event of an incorrect password:
+```
+$ sudo echo "Default	passwd_tries=3" >> /etc/sudoers.d/sudoers_config
+```
+2. Costume error message to be displayed in case of wrong password:
+```
+$ sudo echo "Default	badpass_message=\"*Your Costume message here/*\"" >> /etc/sudoers.d/sudoers_config
+```
+3. Logging **sudo** actions in the folder */var/log/sudo/*:
+```
+$ sudo mkdir -p /var/log/sudo/ && sudo touch /var/log/sudo/sudo.log
+```
+```
+$ sudo echo "Default	logfile=/var/log/sudo/sudo.log" >> /etc/sudoers.d/sudoers_config
+```
