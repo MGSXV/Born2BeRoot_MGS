@@ -166,7 +166,12 @@ $ sudo echo "Default	badpass_message=\"*Your Costume message here/*\"" >> /etc/s
 3. Logging **sudo** actions in the folder */var/log/sudo/*:
 ```
 $ sudo mkdir -p /var/log/sudo/ && sudo touch /var/log/sudo/sudo.log
-```
-```
 $ sudo echo "Default	logfile=/var/log/sudo/sudo.log" >> /etc/sudoers.d/sudoers_config
+$ sudo echo "Default	log_input" >> /etc/sudoers.d/sudoers_config
+$ sudo echo "Default	log_output" >> /etc/sudoers.d/sudoers_config
+```
+3. The **TTY** mode has to be enabled:
+* **TTY** or **Teletype** is an abstract device in UNIX and Linux. Sometimes it refers to a physical input device such as a serial port, and sometimes it refers to a virtual TTY where it allows users to interact with the system, whenever you launch a terminal emulator or use any kind of shell in your system, it interacts with virtual TTYs that are known as pseudo-TTYs or PTY. [More details](https://www.linusakesson.net/programming/tty/index.php)
+```
+$ sudo echo "Default	requiretty" >> /etc/sudoers.d/sudoers_config
 ```
