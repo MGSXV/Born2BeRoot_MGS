@@ -170,8 +170,13 @@ $ sudo echo "Default	logfile=/var/log/sudo/sudo.log" >> /etc/sudoers.d/sudoers_c
 $ sudo echo "Default	log_input" >> /etc/sudoers.d/sudoers_config
 $ sudo echo "Default	log_output" >> /etc/sudoers.d/sudoers_config
 ```
-3. The **TTY** mode has to be enabled:
+4. The **TTY** mode has to be enabled:
 * **TTY** or **Teletype** is an abstract device in UNIX and Linux. Sometimes it refers to a physical input device such as a serial port, and sometimes it refers to a virtual TTY where it allows users to interact with the system, whenever you launch a terminal emulator or use any kind of shell in your system, it interacts with virtual TTYs that are known as pseudo-TTYs or PTY. [More details](https://www.linusakesson.net/programming/tty/index.php)
 ```
 $ sudo echo "Default	requiretty" >> /etc/sudoers.d/sudoers_config
+```
+5. PATH configuration:
+* PATH is an environmental variable in Linux and other Unix-like operating systems that tells the shell which directories to search for executable files in response to commands issued by a user.
+```
+$  sudo echo "Default	secure_path=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"" >> /etc/sudoers.d/sudoers_config
 ```
