@@ -219,7 +219,39 @@ echo "# Sudo : $OS_INFO cmd"
 2. schedule *monitoring.sh*  file to run every 10 mins:
 	- The **cron** command-line utility, also known as cron job is a job scheduler on Unix-like operating systems. Users who set up and maintain software environments use cron to schedule jobs (commands or shell scripts) to run periodically at fixed times, dates, or intervals. [Wikipedia](https://en.wikipedia.org/wiki/Cron), [man](https://man7.org/linux/man-pages/man5/crontab.5.html).
 ```
-$ sudo echo "*/10 * * * *    root    sh /root/monitoring.sh | wall" >> /etc/crontab
+$ sudo echo "*/10 * * * *    root    sh [directory to your monitoring file] | wall" >> /etc/crontab
 $ sudo /etc/init.d/cron restart
 $ sudo /etc/init.d/cron reload
 ```
+## Bonus Part:
+### Setting up a WorPress website
+* The purpose of this part is to be able to set up a WordPress site from scratch, WordPress is is an open-source CMS (Content Management System). It's is basically a tool that makes it easy to manage important aspects of your website. WordPress require basic services and hardwars to work properly:
+	- Disk Space: 1GB+ 
+	- Web Server: Apache or Nginx (We will be using Lighthttpd for the sake of this section).
+	- Database: MySQL version 5.0.15 or greater or any version of MariaDB. (We will be using MariaDB as required in the subject)
+	- RAM: 512MB+
+	- PHP:  Version 7.3 or greater. (And it's modules).
+	- Processor: 1.0GHz+
+1. Installing **Lighthttpd**
+	- **HTTP Server**: The most popular web server on the Internet since April 1996. The Apache HTTP Server is a powerful and flexible HTTP/1.1 compliant web server. **lighttpd**: A secure, fast, compliant, and very flexible web-server that has been optimized for high-performance environments. **lighttpd** has a very low memory footprint compared to other webservers and takes care of cpu-load.
+```
+$ sudo apt update -y
+$ sudo apt upgrade -y
+$ sudo apt install lighttpd -y
+```
+	- Start & Enable Lighttpd Service: you have to start and enable the webserver service so that it can be started automatically even after rebooting the system or server.
+```
+$ sudo systemctl start lighttpd
+$ sudo systemctl enable lighttpd
+```
+	- To check the status:
+```
+$ systemctl status lighttpd
+```
+	- Allow the default port: 80 on UFW
+```
+$ sudo ufw allow 4242
+```
+	- To check if you Lighthttpd server working navigate to your IP address using a browser.
+
+
