@@ -232,26 +232,26 @@ $ sudo /etc/init.d/cron reload
 	- RAM: 512MB+
 	- PHP:  Version 7.3 or greater. (And it's modules).
 	- Processor: 1.0GHz+
-1. Installing **Lighthttpd**
-	- **HTTP Server**: The most popular web server on the Internet since April 1996. The Apache HTTP Server is a powerful and flexible HTTP/1.1 compliant web server. **lighttpd**: A secure, fast, compliant, and very flexible web-server that has been optimized for high-performance environments. **lighttpd** has a very low memory footprint compared to other webservers and takes care of cpu-load.
+* Installing **Lighthttpd**
+1. **HTTP Server**: The most popular web server on the Internet since April 1996. The Apache HTTP Server is a powerful and flexible HTTP/1.1 compliant web server. **lighttpd**: A secure, fast, compliant, and very flexible web-server that has been optimized for high-performance environments. **lighttpd** has a very low memory footprint compared to other webservers and takes care of cpu-load.
 ```
 $ sudo apt update -y
 $ sudo apt upgrade -y
 $ sudo apt install lighttpd -y
 ```
-	- Start & Enable Lighttpd Service: you have to start and enable the webserver service so that it can be started automatically even after rebooting the system or server.
+2. Start & Enable Lighttpd Service: you have to start and enable the webserver service so that it can be started automatically even after rebooting the system or server.
 ```
 $ sudo systemctl start lighttpd
 $ sudo systemctl enable lighttpd
 ```
-	- To check the status:
+3. To check the status:
 ```
 $ systemctl status lighttpd
 ```
-	- Allow the default port: 80 on UFW
+4. Allow the default port: 80 on UFW
 ```
 $ sudo ufw allow 4242
 ```
-	- To check if you Lighthttpd server working navigate to your IP address using a browser.
+5. To check if you Lighthttpd server working navigate to your IP address using a browser.
 
 
