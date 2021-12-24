@@ -232,7 +232,7 @@ $ sudo /etc/init.d/cron reload
 	- RAM: 512MB+
 	- PHP:  Version 7.3 or greater. (And it's modules).
 	- Processor: 1.0GHz+
-* Installing **Lighthttpd**
+#### Installing **Lighthttpd**
 1. **HTTP Server**: The most popular web server on the Internet since April 1996. The Apache HTTP Server is a powerful and flexible HTTP/1.1 compliant web server. **lighttpd**: A secure, fast, compliant, and very flexible web-server that has been optimized for high-performance environments. **lighttpd** has a very low memory footprint compared to other webservers and takes care of cpu-load.
 ```
 $ sudo apt update -y
