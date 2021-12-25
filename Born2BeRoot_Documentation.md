@@ -270,7 +270,7 @@ $ systemctl status lighttpd
 ```
 4. Allow the default port: 80 on UFW
 ```
-$ sudo ufw allow 4242
+$ sudo ufw allow 80
 ```
 5. To check if you Lighthttpd server working navigate to your IP address using a browser.
 #### Install MariaDB
@@ -290,22 +290,61 @@ Disallow root login remotely? [Y/n]: y
 Remove test database and access to it? [Y/n]: y
 Reload privilege tables now? [Y/n]: y
 ```
+3. Create a new database:
+```
+$ sudo mariadb
+> CREATE DATABASE [db_name];
+```
+4. Create an user and grant it all the privileges on the newlycreated database:
+```
+> GRANT ALL PRIVILEGES ON [database-name].* to '[username]' IDENTIFIED BY '[new-user-password]';
+> exit
+```
 #### Install PHP
 * PHP: (Hypertext Preprocessor) is a widely-used open source general-purpose scripting language that is especially suited for web development and can be embedded into HTML.
 1. Install php and it's packages:
 ```
-$ sudo apt install php-cgi php-mysql php7.4
+$ sudo apt install php-cgi php-mysql php7.4 -y
 ```
 2. Here how to verify the installing:
 ```
 $ php -v
 ```
 #### Install WordPress
+1. First we need to install **wget**:
+```
+$ sudo apt install wget -y
+```
+2. Then we will Download WordPress to */var/* directory:
+```
+$ sudo wget http://wordpress.org/latest.tar.gz -P /var/www/html
+```
+3. We need to extract the *tar* file:
+```
+$ sudo tar -xzvf /var/www/html/latest.tar.gz
+$ sudo rm /var/www/html/latest.tar.gz
+```
+4. Copy WordPress files to the parent directory (*/var/www/html*):
+```
+$ sudo cp -r /var/www/html/wordpress/* /var/www/html
+$ sudo rm -rf /var/www/html/wordpress
+```
+5. Basic WordPress configuration file:
+```
+$ sudo cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
+```
+6. Insert your database and user information to WordPress config file:
+```
+$ sudo sed -i "s/define( 'DB_NAME', 'database_name_here' );/define( 'DB_NAME', '[db_name]' );/g"  /var/www/html/wp-config.php
+$ sudo sed -i "s/define( 'DB_USER', 'username_here' );/define( 'DB_USER', '[db_username]' );/g"  /var/www/html/wp-config.php
+$ sudo sed -i "s/define( 'DB_PASSWORD', 'password_here' );/define( 'DB_PASSWORD', '[user_pw]' );/g"  /var/www/html/wp-config.php
+```
+#### TCP Service
 1. First we need to install **vsftpd**: the Very Secure File Transfer Protocol, and allow it default prot: 21.
 Then, in the config file we need to enable any form of FTP write command. 
 ```
-$ sudo apt install vsftpd
+$ sudo apt install vsftpd -y
 $ sudo ufw allow 21
-$ sudo sed -i 's/#write_enable=YES/write_enable=YES/g' /etc/ssh/sshd_config
+$ sudo sed -i 's/#write_enable=YES/write_enable=YES/g' /etc/vsftpd.conf
 ```
 
