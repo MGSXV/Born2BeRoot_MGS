@@ -195,7 +195,11 @@ $ sudo echo "Defaults	requiretty" >> /etc/sudoers.d/sudoers_config
 $  sudo echo "Defaults	secure_path=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/snap/bin\"" >> /etc/sudoers.d/sudoers_config
 ```
 ### Monitoring shell file
-1. This simple shelll script diisplays basic ystem information, will configuer cron to display it every 10 min on all users terminals.
+1. This simple shelll script diisplays basic ystem information, will configuer cron to display it every 10 min on all users terminals. Before we can start with the script we need to install some services.
+```
+$ sudo apt install sysstat -y
+$ sudo apt install net-tools -y
+```
 ```
 #!/bin/sh
 OS_INFO=$(uname -a)
