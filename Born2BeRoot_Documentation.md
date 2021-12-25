@@ -36,9 +36,22 @@ $ sudo usermod -aG sudo <username>
 * **-aG**: The flags for *usermod* command, [RTFM](https://linux.die.net/man/8/usermod) for more information.
 * **sudo**: The group that you need to add the user to (sudo in our example).
 * **username**: The user which will be added to the specified group.
-4. Protect sudo and root privileges:
+4. Add the user to sudoers file:
 ```
-$ sudo touch sudoers_config && sudo echo "Default rootpw" >> /etc/sudoers.d/sudoers_config
+$ sudo echo "[user_name]	ALL=(ALL:ALL) ALL" >> /etc/sudoers.d/sudoers_config
+```
+5. Protect sudo and root privileges:
+```
+$ sudo touch /etc/sudoers.d/sudoers_config && sudo echo "Default rootpw" >> /etc/sudoers.d/sudoers_config
+```
+6. Add a new group:
+```
+$ sudo addgroup user42
+$ sudo adduser [user_name] user42
+```
+	- Check if the commands work:p
+```
+$ getent group user42
 ```
 * By default, when you type *sudo + some_cmd* as a normal user, you are required to enter your own password. This command is for protecting sudo access by requesting root password.
 * **This step is not required in Born2beroot subject**!
@@ -64,7 +77,7 @@ $ sudo sed -i 's/#Port 22/Port 4242/g' /etc/ssh/sshd_config && sudo systemctl re
 	- **systemctl**: is an init system and system manager, used here to ```restart``` and ```reload``` *SSH* service.
 4. Disable SSH login for the root user:
 ```
-$ sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/g /etc/ssh/sshd_config && sudo systemctl restart ssh && sudo systemctl reload ssh
+$ sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/g' /etc/ssh/sshd_config && sudo systemctl restart ssh && sudo systemctl reload ssh
 ```
 * **sshd_config**: is an ASCII text based file where the different configuration options of the SSH server are indicated and configured with keyword/argument pairs.
 * **PermitRootLogin**: Specifies whether root can log in using ssh.
@@ -119,66 +132,67 @@ $ sudo sed -i 's/PASS_WARN_AGE\t7/PASS_WARN_AGE\t7/g' /etc/login.defs
 * **PASS_WARN_AGE**	Number of days warning given before a password expires.
 5. The password must be at least 10 characters long:
 ```
-$ sudo sed -i 's/# minlen = 8/minline = 10' /etc/security/pwquality.conf
+$ sudo sed -i 's/# minlen = 8/minlen = 10/g' /etc/security/pwquality.conf
 ```
 * **minlen**: Minimum size of the new password.
 6. The password must contain at least one uppercase:
 ```
-$ sudo sed -i 's/# ucredit = 0/ucredit = -1' /etc/security/pwquality.conf
+$ sudo sed -i 's/# ucredit = 0/ucredit = -1/g' /etc/security/pwquality.conf
 ```
 * **ucredit**: Maximum number of uppercase charachters, if *ucredit < 0* it means at least *ucredit* uppercase charachters in the string. *i.e: ucredit = -1, means the password must contains at least one uppercase*.
 7. The password must contain at least one digit:
 ```
-$ sudo sed -i 's/# dcredit = 0/dcredit = -1' /etc/security/pwquality.conf
+$ sudo sed -i 's/# dcredit = 0/dcredit = -1/g' /etc/security/pwquality.conf
 ```
 * **dcredit**: Maximum number of digit charachters, if *dcredit < 0* it means at least *dcredit* digit charachters in the string. *i.e: ucredit = -1, means the password must contains at least one digit*.
 8. The password must not contain more than 3 consecutive identical charachters:
 ```
-$ sudo sed -i 's/# maxclassrepeat = 0/maxclassrepeat = 3' /etc/security/pwquality.conf
+$ sudo sed -i 's/# maxclassrepeat = 0/maxclassrepeat = 3/g' /etc/security/pwquality.conf
 ```
 * **dcredit**: Maximum nuber of consecutive identical characters in the password.
 9. The password must not contain the name of the user:
 ```
-$ sudo sed -i 's/# usercheck = 1/usercheck = 1' /etc/security/pwquality.conf
+$ sudo sed -i 's/# usercheck = 1/usercheck = 0/g' /etc/security/pwquality.conf
 ```
 * **usercheck**: Checks whether the password contains the name of the user.
 10.  The password must have at least 7 characters that are not part of the former password:
 ```
-$ sudo sed -i 's/# difok = 1/difok = 7' /etc/security/pwquality.conf
+$ sudo sed -i 's/# difok = 1/difok = 7/g' /etc/security/pwquality.conf
 ```
 * **difok**: Number of characters of the new password which are not present in the old one.
 * This rules does not apply for root by default.
 11.  Applying the previous policies to root:
 ```
-$ sudo sed -i 's/# enforce_for_root/enforce_for_root' /etc/security/pwquality.conf
+$ sudo sed -i 's/# enforcing = 1/enforcing = 1/g' /etc/security/pwquality.conf
+$ sudo sed -i 's/# enforce_for_root/enforce_for_root/g' /etc/security/pwquality.conf
 ```
 * **enforce_for_root**: Specifies that even password of the root user must successfully pass the previous tests.
 ### Sudo authentication restriction
 * Linux is more flixible than you thought. You can have a lot of freedom while using linux. Here are some exaples of what you can do:
 1. Authentication using sudo has to be limited to 3 attempts in the event of an incorrect password:
 ```
-$ sudo echo "Default	passwd_tries=3" >> /etc/sudoers.d/sudoers_config
+$ sudo echo "Defaults	passwd_tries=3" >> /etc/sudoers.d/sudoers_config
 ```
 2. Costume error message to be displayed in case of wrong password:
 ```
-$ sudo echo "Default	badpass_message=\"*Your Costume message here/*\"" >> /etc/sudoers.d/sudoers_config
+$ sudo echo "Defaults	badpass_message=\"*Your Costume message here/*\"" >> /etc/sudoers.d/sudoers_config
 ```
 3. Logging **sudo** actions in the folder */var/log/sudo/*:
 ```
 $ sudo mkdir -p /var/log/sudo/ && sudo touch /var/log/sudo/sudo.log
-$ sudo echo "Default	logfile=/var/log/sudo/sudo.log" >> /etc/sudoers.d/sudoers_config
-$ sudo echo "Default	log_input" >> /etc/sudoers.d/sudoers_config
-$ sudo echo "Default	log_output" >> /etc/sudoers.d/sudoers_config
+$ sudo echo "Defaults	logfile=/var/log/sudo/sudo.log" >> /etc/sudoers.d/sudoers_config
+$ sudo echo "Defaults	log_input" >> /etc/sudoers.d/sudoers_config
+$ sudo echo "Defaults	log_output" >> /etc/sudoers.d/sudoers_config
 ```
 4. The **TTY** mode has to be enabled:
 * **TTY** or **Teletype** is an abstract device in UNIX and Linux. Sometimes it refers to a physical input device such as a serial port, and sometimes it refers to a virtual TTY where it allows users to interact with the system, whenever you launch a terminal emulator or use any kind of shell in your system, it interacts with virtual TTYs that are known as pseudo-TTYs or PTY. [More details](https://www.linusakesson.net/programming/tty/index.php)
 ```
-$ sudo echo "Default	requiretty" >> /etc/sudoers.d/sudoers_config
+$ sudo echo "Defaults	requiretty" >> /etc/sudoers.d/sudoers_config
 ```
 5. PATH configuration:
 * PATH is an environmental variable in Linux and other Unix-like operating systems that tells the shell which directories to search for executable files in response to commands issued by a user.
 ```
-$  sudo echo "Default	secure_path=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"" >> /etc/sudoers.d/sudoers_config
+$  sudo echo "Defaults	secure_path=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/snap/bin\"" >> /etc/sudoers.d/sudoers_config
 ```
 ### Monitoring shell file
 1. This simple shelll script diisplays basic ystem information, will configuer cron to display it every 10 min on all users terminals.
@@ -224,7 +238,7 @@ $ sudo /etc/init.d/cron restart
 $ sudo /etc/init.d/cron reload
 ```
 ## Bonus Part:
-### Setting up a WorPress website
+### Set up a WorPress website
 * The purpose of this part is to be able to set up a WordPress site from scratch, WordPress is is an open-source CMS (Content Management System). It's is basically a tool that makes it easy to manage important aspects of your website. WordPress require basic services and hardwars to work properly:
 	- Disk Space: 1GB+ 
 	- Web Server: Apache or Nginx (We will be using Lighthttpd for the sake of this section).
@@ -232,12 +246,14 @@ $ sudo /etc/init.d/cron reload
 	- RAM: 512MB+
 	- PHP:  Version 7.3 or greater. (And it's modules).
 	- Processor: 1.0GHz+
-#### Installing **Lighthttpd**
+#### Install **Lighthttpd**
 1. **HTTP Server**: The most popular web server on the Internet since April 1996. The Apache HTTP Server is a powerful and flexible HTTP/1.1 compliant web server. **lighttpd**: A secure, fast, compliant, and very flexible web-server that has been optimized for high-performance environments. **lighttpd** has a very low memory footprint compared to other webservers and takes care of cpu-load.
 ```
 $ sudo apt update -y
 $ sudo apt upgrade -y
 $ sudo apt install lighttpd -y
+$ sudo lighty-enable-mod fastcgi
+$ sudo lighty-enable-mod fastcgi-php
 ```
 2. Start & Enable Lighttpd Service: you have to start and enable the webserver service so that it can be started automatically even after rebooting the system or server.
 ```
@@ -253,5 +269,39 @@ $ systemctl status lighttpd
 $ sudo ufw allow 4242
 ```
 5. To check if you Lighthttpd server working navigate to your IP address using a browser.
-
+#### Install MariaDB
+* **MariaDB** is an open source relational database management system, it was created as a software fork of MySQL by developers who played key roles in building the original database.
+1. Install MariaDB:
+```
+$ sudo apt install mariadb-server -y
+```
+2. Remove insecure default settings:
+```
+$ sudo mysql_secure_installation
+Enter current password for root (enter for none): # This is the password of root account of the mysql, don't confuse it with your root password. (Skip this if you would like to)
+Switch to unix_socket authentication [Y/n]: n
+Change the root password? [Y/n]: y # Update your password if you would like to.
+Remove anonymous users? [Y/n]: y
+Disallow root login remotely? [Y/n]: y
+Remove test database and access to it? [Y/n]: y
+Reload privilege tables now? [Y/n]: y
+```
+#### Install PHP
+* PHP: (Hypertext Preprocessor) is a widely-used open source general-purpose scripting language that is especially suited for web development and can be embedded into HTML.
+1. Install php and it's packages:
+```
+$ sudo apt install php-cgi php-mysql php7.4
+```
+2. Here how to verify the installing:
+```
+$ php -v
+```
+#### Install WordPress
+1. First we need to install **vsftpd**: the Very Secure File Transfer Protocol, and allow it default prot: 21.
+Then, in the config file we need to enable any form of FTP write command. 
+```
+$ sudo apt install vsftpd
+$ sudo ufw allow 21
+$ sudo sed -i 's/#write_enable=YES/write_enable=YES/g' /etc/ssh/sshd_config
+```
 
