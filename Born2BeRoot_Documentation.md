@@ -149,7 +149,7 @@ $ sudo sed -i 's/# dcredit = 0/dcredit = -1/g' /etc/security/pwquality.conf
 ```
 $ sudo sed -i 's/# maxclassrepeat = 0/maxclassrepeat = 3/g' /etc/security/pwquality.conf
 ```
-* **dcredit**: Maximum nuber of consecutive identical characters in the password.
+* **maxclassrepeat**: Maximum nuber of consecutive identical characters in the password.
 9. The password must not contain the name of the user:
 ```
 $ sudo sed -i 's/# usercheck = 1/usercheck = 0/g' /etc/security/pwquality.conf
