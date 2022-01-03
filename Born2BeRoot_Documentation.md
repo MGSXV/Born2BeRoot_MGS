@@ -42,7 +42,7 @@ $ sudo touch /etc/sudoers.d/sudoers_config && sudo echo "[user_name]	ALL=(ALL:AL
 ```
 5. Protect sudo and root privileges:
 ```
-$ sudo echo "Default rootpw" >> /etc/sudoers.d/sudoers_config
+$ sudo echo "Defaults rootpw" >> /etc/sudoers.d/sudoers_config
 ```
 6. Add a new group:
 ```
