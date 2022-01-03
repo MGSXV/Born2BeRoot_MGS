@@ -105,7 +105,7 @@ $ sudo ufw enable
 * The **hostname** is what a device is called on a network, it's used to distinguish devices within a local network. In addition, computers can be found by others through the hostname, which enables data exchange within a network.
 1. Update your machine hostname:
 ```
-$ hostname set-hostname *new_hostname*
+$ hostnamectl set-hostname *new_hostname*
 ```
 ### Strong Password Polcies
 * For the sake of this section we will be using *libpam-pwquality* package, it's a set of tools that allow you to configure the refusal of weak passwords for root and user sessions. [More](https://debian-facile.org/doc:securite:passwd:libpam-pwquality).
