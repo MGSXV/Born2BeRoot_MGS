@@ -38,11 +38,11 @@ $ sudo usermod -aG sudo <username>
 * **username**: The user which will be added to the specified group.
 4. Add the user to sudoers file:
 ```
-$ sudo echo "[user_name]	ALL=(ALL:ALL) ALL" >> /etc/sudoers.d/sudoers_config
+$ sudo touch /etc/sudoers.d/sudoers_config && sudo echo "[user_name]	ALL=(ALL:ALL) ALL" >> /etc/sudoers.d/sudoers_config
 ```
 5. Protect sudo and root privileges:
 ```
-$ sudo touch /etc/sudoers.d/sudoers_config && sudo echo "Default rootpw" >> /etc/sudoers.d/sudoers_config
+$ sudo echo "Default rootpw" >> /etc/sudoers.d/sudoers_config
 ```
 6. Add a new group:
 ```
