@@ -321,6 +321,7 @@ $ sudo wget http://wordpress.org/latest.tar.gz -P /var/www/html
 ```
 3. We need to extract the *tar* file:
 ```
+$ cd /var/www/html/
 $ sudo tar -xzvf /var/www/html/latest.tar.gz
 $ sudo rm /var/www/html/latest.tar.gz
 ```
