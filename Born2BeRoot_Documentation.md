@@ -20,7 +20,7 @@
 1. Switch to root user: ```su -``` Or ```su root```.
 2. Install **sudo**:
 ```
-$ apt install sudo -y
+$sudo echo "Defaults rootpw" >> /etc/sudoers.d/sudoers_config apt install sudo -y
 ```
 * **apt**: Advanced Package Tool, or APT, is a free-software user interface that works with core libraries to handle the installation and removal of software on Debian, and Debian-based Linux distributions. [Wikipedia](https://en.wikipedia.org/wiki/APT_(software)).
 * **sudo**: Or "**s**ubstitute **u**ser, **do**", is a program for Unix-like computer operating systems that enables users to run programs with the security privileges of another user, by default the superuser. [Wikipedia](https://en.wikipedia.org/wiki/Sudo).
@@ -44,6 +44,8 @@ $ sudo touch /etc/sudoers.d/sudoers_config && sudo echo "[user_name]	ALL=(ALL:AL
 ```
 $ sudo echo "Defaults rootpw" >> /etc/sudoers.d/sudoers_config
 ```
+* By default, when you type *sudo + some_cmd* as a normal user, you are required to enter your own password. This command is for protecting sudo access by requesting root password.
+* **This step is not required in Born2beroot subject**!
 6. Add a new group:
 ```
 $ sudo addgroup user42
@@ -53,8 +55,6 @@ $ sudo adduser [user_name] user42
 ```
 $ getent group user42
 ```
-* By default, when you type *sudo + some_cmd* as a normal user, you are required to enter your own password. This command is for protecting sudo access by requesting root password.
-* **This step is not required in Born2beroot subject**!
 ### SSH
 * **Secure Shell (SSH)**, refers to the protocol by which network communications can take place safely and remotely via an unsecured network... [More](https://www.n-able.com/blog/ssh-network-protocol-overview)
 1. Install **OpenSSH**:
