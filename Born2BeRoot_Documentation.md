@@ -20,7 +20,7 @@
 1. Switch to root user: ```su -``` Or ```su root```.
 2. Install **sudo**:
 ```
-$sudo echo "Defaults rootpw" >> /etc/sudoers.d/sudoers_config apt install sudo -y
+$ apt install sudo -y
 ```
 * **apt**: Advanced Package Tool, or APT, is a free-software user interface that works with core libraries to handle the installation and removal of software on Debian, and Debian-based Linux distributions. [Wikipedia](https://en.wikipedia.org/wiki/APT_(software)).
 * **sudo**: Or "**s**ubstitute **u**ser, **do**", is a program for Unix-like computer operating systems that enables users to run programs with the security privileges of another user, by default the superuser. [Wikipedia](https://en.wikipedia.org/wiki/Sudo).
@@ -347,5 +347,16 @@ Then, in the config file we need to enable any form of FTP write command.
 $ sudo apt install vsftpd -y
 $ sudo ufw allow 21
 $ sudo sed -i 's/#write_enable=YES/write_enable=YES/g' /etc/vsftpd.conf
+$ sudo mkdir /home/$USER/ftp
+$ sudo mkdir /home/$USER/ftp/files
+$ sudo chown nobody:nogroup /home/$USER/ftp
+$ sudo chmod a-w /home/$USER/ftp
+$ user_sub_token=$USER
+$ local_root=/home/$USER/ftp
+$ sudo sed -i 's/#chroot_local_user=YES = 1/chroot_local_user=YES/g' /etc/vsftpd.conf
+$ sudo touch /etc/vsftpd.userlist
+$ sudo echo $USER >> /etc/vsftpd.userlist
+$ sudo echo 'enable=YES' >> /etc/vsftpd.userlist
+$ sudo echo 'userlist_file=/etc/vsftpd.userlist' >> /etc/vsftpd.userlist 
+$ sudo echo 'userlist_deny=NO' >> /etc/vsftpd.userlist
 ```
-
