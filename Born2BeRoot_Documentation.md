@@ -347,6 +347,7 @@ Then, in the config file we need to enable any form of FTP write command.
 $ sudo apt install vsftpd -y
 $ sudo ufw allow 21
 $ sudo sed -i 's/#write_enable=YES/write_enable=YES/g' /etc/vsftpd.conf
+$ sudo mkdir -P /home/$USER
 $ sudo mkdir /home/$USER/ftp
 $ sudo mkdir /home/$USER/ftp/files
 $ sudo chown nobody:nogroup /home/$USER/ftp
